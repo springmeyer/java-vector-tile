@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -87,7 +87,7 @@ public class VectorTileDecoder {
     static int zigZagDecode(int n) {
         return ((n >> 1) ^ (-(n & 1)));
     }
-    
+
     static Geometry decodeGeometry(GeometryFactory gf, GeomType geomType, List<Integer> commands, double scale) {
         int x = 0;
         int y = 0;
@@ -362,7 +362,7 @@ public class VectorTileDecoder {
         private Feature parseFeature(VectorTile.Tile.Feature feature) {
 
             int tagsCount = feature.getTagsCount();
-            Map<String, Object> attributes = new HashMap<String, Object>(tagsCount / 2);
+            Map<String, Object> attributes = new LinkedHashMap<String, Object>(tagsCount / 2);
             int tagIdx = 0;
             while (tagIdx < feature.getTagsCount()) {
                 String key = keys.get(feature.getTags(tagIdx++));
